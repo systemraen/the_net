@@ -1,0 +1,3 @@
+[submodule "quicksilver"]
+	path = quicksilver
+	url = "https://github.com/ryanisaacg/quicksilver"
