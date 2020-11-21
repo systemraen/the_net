@@ -5,9 +5,9 @@ use quicksilver::{
 	Graphics, Window,
 };
 
-use crate::components::scene::Scene;
+use crate::traits::scene::Scene;
 
-pub struct SceneManager {
+pub struct SceneManager<> {
 	active_scene: u32,
 	scenes: Vec<Scene>,
 }
@@ -23,13 +23,13 @@ impl SceneManager {
 	pub fn new() -> Self {
 		SceneManager {
 			active_scene: 1,
-			scenes: Vec::new(),
+			scenes: Vec::<Scene>::new(),
 		}
 	}
 
 	pub fn init(&mut self) {
-		self.scenes.push(Scene::new("loading"));
-		self.scenes.push(Scene::new("title"));
+		self.scenes.push(Scene::new("loading", 0));
+		self.scenes.push(Scene::new("title", 1));
 	}
 
 	pub fn change_to(&mut self, scene_index: u32) {
