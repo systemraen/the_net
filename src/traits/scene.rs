@@ -1,6 +1,10 @@
 //switch scene to trait
 	// components are traits?
 
+pub trait SceneActor {
+	fn run(&self);
+}
+
 pub struct Scene {
 	title: String,
 	scene_pos: u8,
@@ -20,7 +24,7 @@ impl Scene {
 
 	}
 
-	pub fn start(&mut self, last_scene: u8) {
+	pub fn transition_to(&mut self, last_scene: u8) {
 		self.last_scene = last_scene;
 	}
 }

@@ -7,9 +7,9 @@ use quicksilver::{
 
 use crate::traits::scene::Scene;
 
-pub struct SceneManager<> {
+pub struct SceneManager {
 	active_scene: u32,
-	scenes: Vec<Scene>,
+	scenes: Vec<Scene>
 }
 
 //const SCENES
