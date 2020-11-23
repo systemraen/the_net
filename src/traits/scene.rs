@@ -11,8 +11,6 @@ pub trait SceneActor {
 	fn display(self) -> Self;
 }
 
-pub trait SceneHandler<ET> {}
-
 impl Scene {
 	pub fn new(title: &str) -> Self {
 		Scene {
