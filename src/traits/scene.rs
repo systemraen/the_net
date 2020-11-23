@@ -1,7 +1,7 @@
 //switch scene to trait
 // components are traits?
 
-pub struct Scene {
+pub struct Scene<T> {
 	_title: String,
 	_last_scene: u8,
 }
@@ -11,9 +11,9 @@ pub trait SceneActor {
 	fn display(self) -> Self;
 }
 
-impl Scene {
+impl<T> Scene<T> {
 	pub fn new(title: &str) -> Self {
-		Scene {
+		Scene::<T> {
 			_title: title.to_string(),
 			_last_scene: 0,
 		}
@@ -25,7 +25,7 @@ impl Scene {
 }
 
 
-impl SceneActor for Scene {
+impl<T> SceneActor for Scene<T> {
 	fn check_input(self, _input: u8) -> Self {
 		self
 	}
@@ -39,12 +39,12 @@ fn _get_input() -> u8{
 }
 
 fn _create_scene() {
-	let scene1 = Scene::new("hi I'm a scene 1");
-	let _scene2 = Scene::new("hi I'm a scene 2");
-	let mut current_scene = scene1;
+	// let scene1 = Scene::new("hi I'm a scene 1");
+	// let _scene2 = Scene::new("hi I'm a scene 2");
+	// let mut current_scene = scene1;
 
-	loop {		
-		let input = _get_input();
-		current_scene = current_scene.check_input(input).display();
-	}
+	// loop {		
+	// 	let input = _get_input();
+	// 	current_scene = current_scene.check_input(input).display();
+	// }
 }
