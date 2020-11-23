@@ -5,7 +5,7 @@ use quicksilver::{
 	Graphics, Window,
 };
 
-use crate::traits::scene_actor;
+use crate::structs::scene::Scene;
 
 //const SCENES
 	// 0 loading
@@ -15,13 +15,13 @@ use crate::traits::scene_actor;
 	// 4 dev view
 
 pub struct SceneManager {
-
+	scenes: Vec<Scene>
 }
 
 impl SceneManager {
 	pub fn new() -> Self {
 		SceneManager {
-
+			scenes: Vec::<Scene>::new()
 		}
 	}
 
@@ -30,10 +30,7 @@ impl SceneManager {
 		//self.scene2 = Scene::new("hi I'm a scene 2");
 		//self.current_scene = self.scene1;
 
-	// loop {		
-	// 	let input = _get_input();
-	// 	
-	// }
+	
 	}
 
 	pub fn change_to(&mut self, scene_index: u32) {
