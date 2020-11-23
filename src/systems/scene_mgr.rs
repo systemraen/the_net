@@ -1,16 +1,11 @@
-use crate::modules::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR};
+use crate::structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR};
 use quicksilver::{
 	geom::{Rectangle, Vector},
 	graphics::Color,
 	Graphics, Window,
 };
 
-use crate::traits::scene::Scene;
-
-pub struct SceneManager {
-	active_scene: u32,
-	scenes: Vec<Scene>
-}
+use crate::traits::scene_actor;
 
 //const SCENES
 	// 0 loading
@@ -19,28 +14,39 @@ pub struct SceneManager {
 	// 3 settings
 	// 4 dev view
 
+pub struct SceneManager {
+
+}
+
 impl SceneManager {
 	pub fn new() -> Self {
 		SceneManager {
-			active_scene: 1,
-			scenes: Vec::<Scene>::new(),
+
 		}
 	}
 
 	pub fn init(&mut self) {
-		self.scenes.push(Scene::new("loading"));
-		self.scenes.push(Scene::new("title"));
+		//self.scene1 = Scene::new("hi I'm a scene 1");
+		//self.scene2 = Scene::new("hi I'm a scene 2");
+		//self.current_scene = self.scene1;
+
+	// loop {		
+	// 	let input = _get_input();
+	// 	
+	// }
 	}
 
 	pub fn change_to(&mut self, scene_index: u32) {
-		self.active_scene = scene_index;
+		//self.active_scene = scene_index;
 	}
+
+	pub fn transition_to(&self) {}
+	//pub fn handle_transition(&self) {}
 
 	pub fn draw_scene(&self, gd: &GameData, gfx: &mut Graphics, window: &Window) {
 		gfx.clear(Color::BLACK);
-
-		self.draw_ui(gfx);
-		self.draw_mouse(&gd, gfx);
+		
+		//current_scene = current_scene.check_input(input).display();
 
 		match gfx.present(&window) {
 			Ok(_) => {}

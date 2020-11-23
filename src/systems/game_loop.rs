@@ -4,7 +4,7 @@ use quicksilver::{
     Graphics, Input, Result, Window,
 };
 
-use super::game_data::GameData;
+use crate::structs::game_data::GameData;
 use crate::systems::scene_mgr::SceneManager;
 
 pub struct GameLoop {

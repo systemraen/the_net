@@ -1,8 +1,8 @@
 use quicksilver::{geom::Vector, run, Graphics, Input, Result, Settings, Window};
 
-use the_net::modules::{
-    game_data::{DEFAULT_HEIGHT, DEFAULT_WIDTH},
-    game_loop::GameLoop,
+use the_net::{
+    structs::game_data::{DEFAULT_HEIGHT, DEFAULT_WIDTH},
+    systems::game_loop::GameLoop
 };
 
 fn main() {
