@@ -28,8 +28,8 @@ impl SceneManager {
 	}
 
 	pub fn init(&mut self) {
-		self.scenes.push(Scene::new("loading", 0));
-		self.scenes.push(Scene::new("title", 1));
+		self.scenes.push(Scene::new("loading"));
+		self.scenes.push(Scene::new("title"));
 	}
 
 	pub fn change_to(&mut self, scene_index: u32) {

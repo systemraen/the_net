@@ -1,30 +1,52 @@
 //switch scene to trait
-	// components are traits?
-
-pub trait SceneActor {
-	fn run(&self);
-}
+// components are traits?
 
 pub struct Scene {
-	title: String,
-	scene_pos: u8,
-	last_scene: u8
+	_title: String,
+	_last_scene: u8,
 }
 
+pub trait SceneActor {
+	fn check_input(self, input: u8) -> Self;
+	fn display(self) -> Self;
+}
+
+pub trait SceneHandler<ET> {}
+
 impl Scene {
-	pub fn new(title: &str, pos: u8) -> Self {
+	pub fn new(title: &str) -> Self {
 		Scene {
-			title: title.to_string(), 
-			scene_pos: pos, 
-			last_scene: 0
+			_title: title.to_string(),
+			_last_scene: 0,
 		}
 	}
 
-	pub fn think(&self) {
+	fn _transition_to(&self) {}
 
+	fn _handle_transition(&self) {}
+}
+
+
+impl SceneActor for Scene {
+	fn check_input(self, _input: u8) -> Self {
+		self
 	}
+	fn display(self) -> Self{
+		self
+	}
+}
 
-	pub fn transition_to(&mut self, last_scene: u8) {
-		self.last_scene = last_scene;
+fn _get_input() -> u8{
+	0
+}
+
+fn _create_scene() {
+	let scene1 = Scene::new("hi I'm a scene 1");
+	let _scene2 = Scene::new("hi I'm a scene 2");
+	let mut current_scene = scene1;
+
+	loop {		
+		let input = _get_input();
+		current_scene = current_scene.check_input(input).display();
 	}
 }
