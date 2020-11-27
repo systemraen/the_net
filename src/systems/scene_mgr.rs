@@ -8,29 +8,28 @@ use quicksilver::{
 use crate::structs::scene::Scene;
 
 //const SCENES
-	// 0 loading
-	// 1 title
-	// 2 game
-	// 3 settings
-	// 4 dev view
+// 0 loading
+// 1 title
+// 2 game
+// 3 settings
+// 4 dev view
+use crate::traits::scene_actor::SceneActor;
 
 pub struct SceneManager {
-	scenes: Vec<Scene>
+	scenes: Vec<Scene<Box<dyn SceneActor>>>,
+	current_scene: usize,
 }
 
 impl SceneManager {
 	pub fn new() -> Self {
 		SceneManager {
-			scenes: Vec::<Scene>::new()
+			scenes: Vec::<Scene>::new(),
+			current_scene: 0,
 		}
 	}
 
 	pub fn init(&mut self) {
-		//self.scene1 = Scene::new("hi I'm a scene 1");
-		//self.scene2 = Scene::new("hi I'm a scene 2");
-		//self.current_scene = self.scene1;
-
-	
+		
 	}
 
 	pub fn change_to(&mut self, scene_index: u32) {
@@ -41,9 +40,9 @@ impl SceneManager {
 	//pub fn handle_transition(&self) {}
 
 	pub fn draw_scene(&self, gd: &GameData, gfx: &mut Graphics, window: &Window) {
-		gfx.clear(Color::BLACK);
-		
-		//current_scene = current_scene.check_input(input).display();
+		gfx.clear(Color::BLACK);		
+
+		self.current_scene = self.scenes[self.current_scene].run(gd, gfx);
 
 		match gfx.present(&window) {
 			Ok(_) => {}
