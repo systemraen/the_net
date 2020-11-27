@@ -5,25 +5,28 @@ use quicksilver::{
 	Graphics, Window,
 };
 
-use crate::structs::scene::Scene;
+use crate::traits::scene::Scene;
+use crate::scenes::*;
 
-//const SCENES
-// 0 loading
-// 1 title
-// 2 game
-// 3 settings
-// 4 dev view
-use crate::traits::scene_actor::SceneActor;
+enum SceneName {
+	Loading,
+	Title,
+	Game,
+	Settings, 
+	DevConsole
+}
 
 pub struct SceneManager {
-	scenes: Vec<Scene<Box<dyn SceneActor>>>,
+	scenes: Vec<Box<dyn Scene>>,
 	current_scene: usize,
 }
 
 impl SceneManager {
 	pub fn new() -> Self {
 		SceneManager {
-			scenes: Vec::<Scene>::new(),
+			scenes: vec![
+				
+			],
 			current_scene: 0,
 		}
 	}
@@ -42,7 +45,7 @@ impl SceneManager {
 	pub fn draw_scene(&self, gd: &GameData, gfx: &mut Graphics, window: &Window) {
 		gfx.clear(Color::BLACK);		
 
-		self.current_scene = self.scenes[self.current_scene].run(gd, gfx);
+		//self.current_scene = self.scenes[self.current_scene].run(gd, gfx);
 
 		match gfx.present(&window) {
 			Ok(_) => {}

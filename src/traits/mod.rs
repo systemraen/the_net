@@ -1,1 +1,1 @@
-pub mod scene_actor;
+pub mod scene;
