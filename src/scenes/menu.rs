@@ -1,10 +1,13 @@
-use crate::{
-	structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR},
-	traits::scene::Scene,
-};
-use quicksilver::{
-	geom::{Rectangle, Vector},
-	graphics::Graphics,
+use {
+	crate::{
+		structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR},
+		traits::scene::Scene,
+	},
+	mergui::{widgets::ButtonConfig, Context, FontStyle, MFont},
+	quicksilver::{
+		geom::{Rectangle, Vector},
+		graphics::Graphics,
+	},
 };
 
 pub struct MenuScene {}

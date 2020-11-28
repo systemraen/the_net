@@ -1,7 +1,6 @@
 use std::collections::HashMap;
-use crate::structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR};
+use crate::structs::game_data::GameData;
 use quicksilver::{
-	geom::{Rectangle, Vector},
 	graphics::Color,
 	Graphics, Window,
 };
@@ -52,17 +51,7 @@ impl SceneManager {
 
 		match gfx.present(&window) {
 			Ok(_) => {}
-			Err(e) => println!("err {}", e), // ☒ ~~add logger~~ use quicksilver's logger
-			                                 // ☒ maybe crash program at this point?
-			                                 //     - why would it give an error?
+			Err(e) => println!("err {}", e)
 		}
-	}
-
-	fn draw_ui(&self, gfx: &mut Graphics) {
-		
-	}
-
-	fn draw_mouse(&self, gd: &GameData, gfx: &mut Graphics) {
-		
 	}
 }

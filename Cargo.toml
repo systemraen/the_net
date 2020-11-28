@@ -4,11 +4,7 @@ version = "0.1.0"
 authors = ["xipi2048 <raen@quantumtrip.org>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-quicksilver = "0.4" # game framework: https://github.com/ryanisaacg/quicksilver
-#quicksilver-utils-async = "0.3.0"
-#quicksilver-utils-ecs = "0.1.0"
-#mergui = "0.1.0-alpha0.7"
-#silver_animation = "0.1.0-alpha0.4"
+# game framework: https://github.com/ryanisaacg/quicksilver
+quicksilver = "0.4"
+mergui = { git="https://github.com/lenscas/mergui" }
