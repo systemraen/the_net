@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use crate::structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR};
 use quicksilver::{
 	geom::{Rectangle, Vector},
@@ -8,44 +9,46 @@ use quicksilver::{
 use crate::traits::scene::Scene;
 use crate::scenes::*;
 
-enum SceneName {
+type SceneStore = HashMap<SceneName, Box<dyn Scene>>;
+
+#[derive(Hash, Eq, PartialEq)]
+pub enum SceneName {
 	Loading,
 	Title,
 	Game,
-	Settings, 
+	Pause,
+	Menu,
 	DevConsole
 }
 
 pub struct SceneManager {
-	scenes: Vec<Box<dyn Scene>>,
-	current_scene: usize,
+	scenes: SceneStore,
+	current_scene: SceneName,
 }
 
 impl SceneManager {
 	pub fn new() -> Self {
 		SceneManager {
-			scenes: vec![
-				
-			],
-			current_scene: 0,
+			scenes: HashMap::new(),
+			current_scene: SceneName::Menu,
 		}
 	}
 
 	pub fn init(&mut self) {
-		
-	}
-
-	pub fn change_to(&mut self, scene_index: u32) {
-		//self.active_scene = scene_index;
+		self.scenes.insert(SceneName::Loading, Box::new(LoadingScene::new()));
+		self.scenes.insert(SceneName::Title, Box::new(TitleScene::new()));
+		self.scenes.insert(SceneName::Game, Box::new(GameScene::new()));
+		self.scenes.insert(SceneName::Pause, Box::new(PauseScene::new()));
+		self.scenes.insert(SceneName::Menu, Box::new(MenuScene::new()));
+		self.scenes.insert(SceneName::DevConsole, Box::new(DevConScene::new()));
 	}
 
 	pub fn transition_to(&self) {}
-	//pub fn handle_transition(&self) {}
 
-	pub fn draw_scene(&self, gd: &GameData, gfx: &mut Graphics, window: &Window) {
-		gfx.clear(Color::BLACK);		
-
-		//self.current_scene = self.scenes[self.current_scene].run(gd, gfx);
+	pub fn draw_scene(&self, gd: &mut GameData, gfx: &mut Graphics, window: &Window) {
+		gfx.clear(Color::BLACK);
+		
+		self.scenes[&self.current_scene].draw_scene(gd, gfx);
 
 		match gfx.present(&window) {
 			Ok(_) => {}
@@ -56,25 +59,10 @@ impl SceneManager {
 	}
 
 	fn draw_ui(&self, gfx: &mut Graphics) {
-		let rect = Rectangle::new(
-			Vector::new(1., 1.),
-			Vector::new(DEFAULT_WIDTH - 1., DEFAULT_HEIGHT - 2.),
-		);
-		gfx.stroke_rect(&rect, FG_COLOR);
+		
 	}
 
 	fn draw_mouse(&self, gd: &GameData, gfx: &mut Graphics) {
-		// ☐ add to settings
-		// draw pointer
-		// ☑ xy
-		// ☐ dXY (trail)
-		// draw particles
-
-		let pointer_size = 5.;
-		let rect = Rectangle::new(
-			gd.mouse_pos - Vector::new(pointer_size / 2., pointer_size / 2.),
-			Vector::new(pointer_size, pointer_size),
-		);
-		gfx.fill_rect(&rect, FG_COLOR);
+		
 	}
 }

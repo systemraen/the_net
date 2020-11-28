@@ -4,8 +4,14 @@ use quicksilver::Graphics;
 
 pub struct PauseScene {}
 
+impl PauseScene {
+	pub fn new() -> Self {
+		PauseScene {}
+	}
+}
+
 impl Scene for PauseScene {
-	fn check_input(&self, gd: &mut GameData) {}	
+	fn check_input(&self, gd: &mut GameData) {}
 	fn draw_ui(&self, gd: &mut GameData, gfx: &mut Graphics) {}
 	fn draw_mouse(&self, gd: &mut GameData, gfx: &mut Graphics) {}
 }

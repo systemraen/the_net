@@ -2,16 +2,18 @@ use crate::structs::game_data::GameData;
 use crate::traits::scene::Scene;
 use quicksilver::Graphics;
 
-pub struct GameScene {}
+pub struct LoadingScene {}
 
-impl GameScene {
+impl LoadingScene {
 	pub fn new() -> Self {
-		GameScene {}
+		LoadingScene {}
 	}
 }
 
-impl Scene for GameScene {
+impl Scene for LoadingScene {
 	fn check_input(&self, gd: &mut GameData) {}
-	fn draw_ui(&self, gd: &mut GameData, gfx: &mut Graphics) {}
+	fn draw_ui(&self, gd: &mut GameData, gfx: &mut Graphics) {
+		
+	}
 	fn draw_mouse(&self, gd: &mut GameData, gfx: &mut Graphics) {}
 }

@@ -34,7 +34,7 @@ impl GameLoop {
         // ☐ start network stuff
         // ☐ init asset cacher
         // ☐ load initial assets
-        // ☐ init scene manager
+        // ☑ init scene manager
         // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
         self.scene_manager.init();
@@ -46,7 +46,7 @@ impl GameLoop {
         loop {
             self.handle_input().await;
 
-            self.scene_manager.draw_scene(&self.gd, &mut self.gfx, &self.window);
+            self.scene_manager.draw_scene(&mut self.gd, &mut self.gfx, &self.window);
         }
     }
 
