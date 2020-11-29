@@ -4,8 +4,12 @@ version = "0.1.0"
 authors = ["xipi2048 <raen@quantumtrip.org>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+members = [	
+	".", "net_ui"
+]
 
 [dependencies]
 # game framework: https://github.com/ryanisaacg/quicksilver
 quicksilver = "0.4" 
+net_ui = { path = "net_ui" }

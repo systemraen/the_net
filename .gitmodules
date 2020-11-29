@@ -1,3 +1,7 @@
 [submodule "quicksilver"]
 	path = quicksilver
 	url = "https://github.com/ryanisaacg/quicksilver"
+
+[submodule "net_ui"]
+	path = net_ui
+	url = "https://github.com/xipi2048/net_ui"
