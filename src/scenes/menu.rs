@@ -1,10 +1,7 @@
-use crate::{
-	structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR},
-	traits::scene::Scene,
-};
-use quicksilver::{
-	geom::{Rectangle, Vector},
-	graphics::Graphics,
+use {
+	crate::{structs::game_data::GameData, traits::scene::Scene},
+	quicksilver::graphics::Graphics,
+	net_ui::context
 };
 
 pub struct MenuScene {}
@@ -19,7 +16,5 @@ impl Scene for MenuScene {
 	fn check_input(&self, gd: &mut GameData) {}
 	fn draw_ui(&self, gd: &mut GameData, gfx: &mut Graphics) {
 		self.print_outline(gfx);
-
-		
 	}
 }
