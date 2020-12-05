@@ -1,3 +1,11 @@
+pub use crate::intro::IntroScene;
+pub use crate::dev_console::DevConScene;
+pub use crate::game::GameScene;
+pub use crate::loading::LoadingScene;
+pub use crate::menu::MenuScene;
+pub use crate::pause::PauseScene;
+pub use crate::title::TitleScene;
+
 use crate::structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR};
 use quicksilver::{
 	geom::{Rectangle, Vector},
@@ -5,14 +13,16 @@ use quicksilver::{
 };
 
 pub trait Scene {
-	fn draw_scene(&self, gd: &mut GameData, gfx: &mut Graphics) {
-		self.check_input(gd);
-		self.draw_ui(gd, gfx);
+	fn draw(&self, gd: &mut GameData, gfx: &mut Graphics) {
+		//maybe process gd here for the mouse stuff?
+			// why though?
+		self.process_gd(gd);
+		self.draw_scene(gfx);
 		self.draw_mouse(gd, gfx);
 	}
 
-	fn check_input(&self, gd: &mut GameData);
-	fn draw_ui(&self, gd: &mut GameData, gfx: &mut Graphics);
+	fn process_gd(&self, gd: &mut GameData) {}
+	fn draw_scene(&self, gfx: &mut Graphics) {}
 	fn draw_mouse(&self, gd: &mut GameData, gfx: &mut Graphics) {
 		// ☐ add to settings
 		// draw pointer
@@ -36,3 +46,6 @@ pub trait Scene {
 		gfx.stroke_rect(&rect, FG_COLOR);
 	}
 }
+
+#[derive(Default)]
+pub struct SceneData {}

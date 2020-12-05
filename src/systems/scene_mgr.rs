@@ -6,8 +6,7 @@ use quicksilver::{
 	Graphics, Window,
 };
 
-use crate::traits::scene::Scene;
-use crate::scenes::*;
+use crate::scenes::prelude::*;
 
 type SceneStore = HashMap<SceneName, Box<dyn Scene>>;
 
@@ -36,13 +35,13 @@ impl SceneManager {
 	}
 
 	pub fn init(&mut self) {
-		self.scenes.insert(SceneName::Intro, Box::new(LoadingScene::new()));
-		self.scenes.insert(SceneName::Loading, Box::new(LoadingScene::new()));
-		self.scenes.insert(SceneName::Title, Box::new(TitleScene::new()));
-		self.scenes.insert(SceneName::Game, Box::new(GameScene::new()));
-		self.scenes.insert(SceneName::Pause, Box::new(PauseScene::new()));
-		self.scenes.insert(SceneName::Menu, Box::new(MenuScene::new()));
-		self.scenes.insert(SceneName::DevConsole, Box::new(DevConScene::new()));
+		self.scenes.insert(SceneName::Intro, Box::new(IntroScene{}));
+		// self.scenes.insert(SceneName::Loading, Box::new(LoadingScene::new()));
+		// self.scenes.insert(SceneName::Title, Box::new(TitleScene::new()));
+		// self.scenes.insert(SceneName::Game, Box::new(GameScene::new()));
+		// self.scenes.insert(SceneName::Pause, Box::new(PauseScene::new()));
+		// self.scenes.insert(SceneName::Menu, Box::new(MenuScene::new()));
+		// self.scenes.insert(SceneName::DevConsole, Box::new(DevConScene::new()));
 	}
 
 	pub fn transition_to(&self) {}
@@ -50,7 +49,7 @@ impl SceneManager {
 	pub fn draw_scene(&self, gd: &mut GameData, gfx: &mut Graphics, window: &Window) {
 		gfx.clear(Color::BLACK);
 		
-		self.scenes[&self.current_scene].draw_scene(gd, gfx);
+		//self.scenes[&self.current_scene].draw_scene(gd, gfx);
 
 		match gfx.present(&window) {
 			Ok(_) => {}
