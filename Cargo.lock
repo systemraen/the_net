@@ -979,6 +979,9 @@ dependencies = [
 [[package]]
 name = "net_ui"
 version = "0.1.0"
+dependencies = [
+ "quicksilver",
+]
 
 [[package]]
 name = "nix"
