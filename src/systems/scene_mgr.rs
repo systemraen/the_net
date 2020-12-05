@@ -13,6 +13,7 @@ type SceneStore = HashMap<SceneName, Box<dyn Scene>>;
 
 #[derive(Hash, Eq, PartialEq)]
 pub enum SceneName {
+	Intro,
 	Loading,
 	Title,
 	Game,
@@ -30,11 +31,12 @@ impl SceneManager {
 	pub fn new() -> Self {
 		SceneManager {
 			scenes: HashMap::new(),
-			current_scene: SceneName::Menu,
+			current_scene: SceneName::Intro,
 		}
 	}
 
 	pub fn init(&mut self) {
+		self.scenes.insert(SceneName::Intro, Box::new(LoadingScene::new()));
 		self.scenes.insert(SceneName::Loading, Box::new(LoadingScene::new()));
 		self.scenes.insert(SceneName::Title, Box::new(TitleScene::new()));
 		self.scenes.insert(SceneName::Game, Box::new(GameScene::new()));
