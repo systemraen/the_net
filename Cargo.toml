@@ -11,5 +11,5 @@ members = [
 
 [dependencies]
 # game framework: https://github.com/ryanisaacg/quicksilver
-quicksilver = "0.4" 
+quicksilver = { path = "quicksilver" } 
 net_ui = { path = "net_ui" }
