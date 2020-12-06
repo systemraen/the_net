@@ -17,6 +17,7 @@ pub trait Scene {
 		//maybe process gd here for the mouse stuff?
 			// why though?
 		self.process_gd(gd);
+		self.draw_border(gfx);
 		self.draw_scene(gfx);
 		self.draw_mouse(gd, gfx);
 	}
@@ -38,7 +39,7 @@ pub trait Scene {
 		gfx.fill_rect(&rect, FG_COLOR);
 	}
 
-	fn print_outline(&self, gfx: &mut Graphics) {
+	fn draw_border(&self, gfx: &mut Graphics) {
 		let rect = Rectangle::new(
 			Vector::new(1., 1.),
 			Vector::new(DEFAULT_WIDTH - 1., DEFAULT_HEIGHT - 2.),
