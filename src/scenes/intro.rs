@@ -24,7 +24,7 @@ impl Scene for IntroScene {
 		//self.context
 	}
 
-	fn handle_data(&mut self, gd: &mut GameData) {
+	fn handle_data(&mut self, gd: &GameData) {
 		
 	}
 

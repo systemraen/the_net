@@ -56,7 +56,7 @@ impl SceneManager {
 		scene.init();
 	}
 
-	pub fn draw_scene(&mut self, gd: &mut GameData, gfx: &mut Graphics, window: &Window) {
+	pub fn draw_scene(&mut self, gd: &GameData, gfx: &mut Graphics, window: &Window) {
 		gfx.clear(Color::BLACK);		
 
 		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
