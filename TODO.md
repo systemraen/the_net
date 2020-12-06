@@ -34,7 +34,7 @@
 [] upgrade to specs (for ECS)
 [] security testing
 
->>> Answering any questions - going to be spending a lot of time looking at docs off screen til I get better with rust <<<⚉>>>
+>>> Answering any questions - going to be spending a lot of time looking at docs til I get better with Rust <<<⚉>>>
 
 __________________   __________________________
 |           __  _|  |_  _______________      |
@@ -48,9 +48,6 @@ __==================--- -==-=-=-     |     |
  -==-=-=-    |     |
 ____-==-=-=-_|     |________________________________________________
               |____|  
-
-~BRB~
-
 
 
 

@@ -5,4 +5,5 @@ pub mod loading;
 pub mod menu;
 pub mod pause;
 pub mod title;
+pub mod scene_data;
 pub mod prelude;

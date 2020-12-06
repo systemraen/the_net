@@ -5,6 +5,7 @@ pub use crate::loading::LoadingScene;
 pub use crate::menu::MenuScene;
 pub use crate::pause::PauseScene;
 pub use crate::title::TitleScene;
+pub use crate::scene_data::SceneData;
 
 use crate::structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR};
 use quicksilver::{
@@ -22,6 +23,8 @@ pub trait Scene {
 		self.draw_mouse(gd, gfx);
 	}
 
+	//#todo: remove the default impls
+	fn init(&self) {}
 	fn process_gd(&self, gd: &mut GameData) {}
 	fn draw_scene(&self, gfx: &mut Graphics) {}
 	fn draw_mouse(&self, gd: &mut GameData, gfx: &mut Graphics) {
@@ -47,6 +50,3 @@ pub trait Scene {
 		gfx.stroke_rect(&rect, FG_COLOR);
 	}
 }
-
-#[derive(Default)]
-pub struct SceneData {}

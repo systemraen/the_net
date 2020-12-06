@@ -35,13 +35,17 @@ impl SceneManager {
 	}
 
 	pub fn init(&mut self) {
-		self.scenes.insert(SceneName::Intro, Box::new(IntroScene{}));
+		self.scenes.insert(SceneName::Intro, Box::new(IntroScene::new()));
 		// self.scenes.insert(SceneName::Loading, Box::new(LoadingScene::new()));
 		// self.scenes.insert(SceneName::Title, Box::new(TitleScene::new()));
 		// self.scenes.insert(SceneName::Game, Box::new(GameScene::new()));
 		// self.scenes.insert(SceneName::Pause, Box::new(PauseScene::new()));
 		// self.scenes.insert(SceneName::Menu, Box::new(MenuScene::new()));
 		// self.scenes.insert(SceneName::DevConsole, Box::new(DevConScene::new()));
+	
+		for (_name,scene) in &self.scenes {
+			scene.init();
+		}
 	}
 
 	pub fn transition_to(&self) {}
