@@ -6,4 +6,5 @@ pub mod menu;
 pub mod pause;
 pub mod title;
 pub mod scene_data;
+pub mod scene;
 pub mod prelude;

@@ -43,17 +43,24 @@ impl SceneManager {
 		// self.scenes.insert(SceneName::Menu, Box::new(MenuScene::new()));
 		// self.scenes.insert(SceneName::DevConsole, Box::new(DevConScene::new()));
 	
-		for (_name,scene) in &self.scenes {
-			scene.init();
-		}
+		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
+		scene.init();
 	}
 
-	pub fn transition_to(&self) {}
+	pub fn trans_to(&mut self, next_scene: SceneName) {
+		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
+		scene.trans_from();
+		self.current_scene = next_scene;
 
-	pub fn draw_scene(&self, gd: &mut GameData, gfx: &mut Graphics, window: &Window) {
-		gfx.clear(Color::BLACK);
-		
-		//self.scenes[&self.current_scene].draw_scene(gd, gfx);
+		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
+		scene.init();
+	}
+
+	pub fn draw_scene(&mut self, gd: &mut GameData, gfx: &mut Graphics, window: &Window) {
+		gfx.clear(Color::BLACK);		
+
+		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
+		scene.draw(gd, gfx);
 
 		match gfx.present(&window) {
 			Ok(_) => {}

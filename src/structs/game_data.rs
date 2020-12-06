@@ -25,7 +25,7 @@ impl GameData {
     //#todo: move this to debug trait
     pub fn print(&self) {
         if self.last_mouse_pos != self.mouse_pos {
-            println!("m: {} | lm: {}", self.mouse_pos, self.last_mouse_pos);
+            //println!("m: {} | lm: {}", self.mouse_pos, self.last_mouse_pos);
         }
     }
 }

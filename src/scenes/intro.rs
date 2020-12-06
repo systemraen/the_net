@@ -1,5 +1,5 @@
 use {
-	crate::scenes::prelude::{Scene, SceneData},
+	crate::{structs::GameData, scenes::prelude::{Scene, SceneData}},
 	net_ui::{Context, Layer},
 	quicksilver::Graphics,
 };
@@ -10,17 +10,31 @@ pub struct IntroScene {
 
 impl IntroScene {
 	pub fn new() -> Self {
-		IntroScene { data: SceneData { context: Context::new() } }
+		IntroScene {
+			data: SceneData {
+				context: Context::new(), // can also init the layers/widgets here
+			},
+		}
 	}
 }
 
 impl Scene for IntroScene {
-	fn init(&self) {
-		//data.add_rect(0, 0, 100, 100);
+	fn init(&mut self) {
+		//init data
+		//self.context
 	}
+
+	fn handle_data(&mut self, gd: &mut GameData) {
+		
+	}
+
 	fn draw_scene(&self, gfx: &mut Graphics) {
 		// okay... maybe not cacheing the widgets - load them up every time
-			// why though?		
+		// why though?
+	}
+
+	fn trans_from(&mut self) {
+		//free data
 	}
 }
 
