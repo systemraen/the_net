@@ -25,16 +25,18 @@ impl Scene for IntroScene {
 	}
 
 	fn handle_data(&mut self, gd: &GameData) {
-		
+		// intro gd handling
+			// eastern eggs and stuff
 	}
 
 	fn draw_scene(&self, gfx: &mut Graphics) {
-		// okay... maybe not cacheing the widgets - load them up every time
-		// why though?
+		//let context handle drawing
+		self.data.context.draw(gfx);
 	}
 
 	fn trans_from(&mut self) {
 		//free data
+		self.data.context.clear_layers();
 	}
 }
 
