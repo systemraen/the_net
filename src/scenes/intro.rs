@@ -22,6 +22,9 @@ impl Scene for IntroScene {
 	fn init(&mut self) {
 		//init data
 		//self.context
+		self.data.context.add_layer(Layer {
+			widgets: vec![]
+		});
 	}
 
 	fn handle_data(&mut self, gd: &GameData) {
@@ -31,7 +34,7 @@ impl Scene for IntroScene {
 
 	fn draw_scene(&self, gfx: &mut Graphics) {
 		//let context handle drawing
-		self.data.context.draw(gfx);
+		self.data.context.draw(gfx, crate::structs::game_data::FG_COLOR);
 	}
 
 	fn trans_from(&mut self) {
