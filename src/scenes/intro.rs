@@ -1,5 +1,5 @@
 use {
-	crate::{structs::GameData, scenes::prelude::{Scene, SceneData}},
+	crate::{structs::{GameData, game_data::FG_COLOR}, scenes::prelude::{Scene, SceneData}},
 	net_ui::{Context, Layer},
 	quicksilver::Graphics,
 };
@@ -31,7 +31,7 @@ impl Scene for IntroScene {
 
 	fn draw_scene(&self, gfx: &mut Graphics) {
 		//let context handle drawing
-		self.data.context.draw(gfx);
+		self.data.context.draw(gfx, FG_COLOR);
 	}
 
 	fn trans_from(&mut self) {
