@@ -1,6 +1,6 @@
 use {
 	crate::{structs::GameData, scenes::prelude::{Scene, SceneData}},
-	net_ui::{Context, Layer},
+	net_ui::{Context, Layer, widgets::button::Button},
 	quicksilver::Graphics,
 };
 
@@ -23,7 +23,9 @@ impl Scene for IntroScene {
 		//init data
 		//self.context
 		self.data.context.add_layer(Layer {
-			widgets: vec![]
+			widgets: vec![
+				net_ui::widgets::
+			]
 		});
 	}
 
