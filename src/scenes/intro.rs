@@ -34,7 +34,7 @@ impl Scene for IntroScene {
 
 	fn draw_scene(&self, gfx: &mut Graphics) {
 		//let context handle drawing
-		self.data.context.draw(gfx, crate::structs::game_data::FG_COLOR);
+		//self.data.context.draw(gfx, crate::structs::game_data::FG_COLOR);
 	}
 
 	fn trans_from(&mut self) {
