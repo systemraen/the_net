@@ -4,19 +4,20 @@ use {
 		structs::GameData,
 	},
 	net_ui::{structs::WidgetData, widgets::Button, Context, Layer},
-	quicksilver::Graphics,
+	quicksilver::{Graphics, graphics::VectorFont}
 };
 
 pub struct IntroScene {
-	data: SceneData,
+	data: SceneData
 }
 
 impl IntroScene {
+
 	pub fn new() -> Self {
 		IntroScene {
 			data: SceneData {
-				context: Context::new(), // can also init the layers/widgets here
-			},
+				context: Context::new()
+			}
 		}
 	}
 }
