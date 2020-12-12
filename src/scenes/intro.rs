@@ -21,6 +21,10 @@ impl IntroScene {
 	}
 }
 
+//#region "Data Structures"
+// some struts and enums here
+//#endregion
+
 impl Scene for IntroScene {
 	fn init(&mut self) {
 		//init data
