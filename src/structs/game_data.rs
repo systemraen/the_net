@@ -1,6 +1,4 @@
-use quicksilver::{
-    graphics::Color,
-    geom::Vector};
+use quicksilver::{geom::Vector, graphics::Color, Timer};
 
 //https://en.wikipedia.org/wiki/16:9_aspect_ratio#Common_resolutions
 pub const DEFAULT_WIDTH: f32 = 1366.; //WXGA
@@ -13,6 +11,7 @@ pub const FG_COLOR: Color = Color::PURPLE;
 pub struct GameData {
     pub mouse_pos: Vector,
     pub last_mouse_pos: Vector,
+    pub timer: Timer
 }
 
 impl GameData {

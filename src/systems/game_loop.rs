@@ -1,10 +1,11 @@
 use quicksilver::{
     geom::Vector,
+    graphics::{Color, VectorFont},
     input::{Event, Key},
-    Graphics, Input, Result, Window,
+    Graphics, Input, Result, Timer, Window,
 };
 
-use crate::structs::game_data::GameData;
+use crate::structs::game_data::{GameData, FG_COLOR};
 use crate::systems::scene_mgr::SceneManager;
 
 pub struct GameLoop {
@@ -26,6 +27,7 @@ impl GameLoop {
             gd: GameData {
                 mouse_pos: Vector::new(0., 0.),
                 last_mouse_pos: Vector::new(0., 0.),
+                timer: Timer::time_per_second(60.),
             },
             scene_manager: SceneManager::new(),
         }
@@ -45,10 +47,24 @@ impl GameLoop {
     }
 
     pub async fn run(&mut self) -> Result<()> {
+        let ttf = VectorFont::load("NASDAQER.ttf").await?;
+        let mut font = ttf.to_renderer(&mut self.gfx, 72.)?;
+
         while self.running {
             self.handle_input().await;
+            self.gfx.clear(Color::WHITE);
+
             self.scene_manager
                 .draw_scene(&self.gd, &mut self.gfx, &self.window);
+
+            font.draw(&mut self.gfx, "THE NET", FG_COLOR, Vector::new(500., 500.))?;
+
+            match self.gfx.present(&self.window) {
+                Ok(_) => {}
+                Err(e) => println!("err {}", e), // ☒ ~~add logger~~ use quicksilver's logger
+                                                 // ☒ maybe crash program at this point?
+                                                 //     - why would it give an error?
+            }
         }
 
         Ok(())
