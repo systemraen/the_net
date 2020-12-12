@@ -52,7 +52,7 @@ impl GameLoop {
 
         while self.running {
             self.handle_input().await;
-            self.gfx.clear(Color::WHITE);
+            self.gfx.clear(Color::BLACK);
 
             self.scene_manager
                 .draw_scene(&self.gd, &mut self.gfx, &self.window);
