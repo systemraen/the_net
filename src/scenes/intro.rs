@@ -4,7 +4,7 @@ use {
 		structs::GameData,
 	},
 	net_ui::{structs::WidgetData, widgets::Button, Context, Layer},
-	quicksilver::{geom::Rectangle, Graphics},
+	quicksilver::Graphics,
 };
 
 pub struct IntroScene {
@@ -36,7 +36,7 @@ impl Scene for IntroScene {
 		});
 	}
 
-	fn handle_data(&mut self, gd: &GameData) {
+	fn handle_data(&mut self, _gd: &GameData) {
 		// intro gd handling
 		// eastern eggs and stuff
 	}
