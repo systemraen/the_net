@@ -13,3 +13,4 @@ members = [
 # game framework: https://github.com/ryanisaacg/quicksilver
 quicksilver = { path = "quicksilver" } 
 net_ui = { path = "net_ui" }
+log = "0.4.11"

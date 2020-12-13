@@ -2344,6 +2344,7 @@ dependencies = [
 name = "the_net"
 version = "0.1.0"
 dependencies = [
+ "log",
  "net_ui",
  "quicksilver",
 ]

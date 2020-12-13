@@ -47,8 +47,10 @@ impl GameLoop {
     }
 
     pub async fn run(&mut self) -> Result<()> {
-        let ttf = VectorFont::load("NASDAQER.ttf").await?;
-        let mut font = ttf.to_renderer(&mut self.gfx, 72.)?;
+        
+        let mut title_pos: f32 = -500.;
+
+        //#todo: Open issue in quicksilver to provide width of font
 
         while self.running {
             self.handle_input().await;
@@ -57,7 +59,9 @@ impl GameLoop {
             self.scene_manager
                 .draw_scene(&self.gd, &mut self.gfx, &self.window);
 
-            font.draw(&mut self.gfx, "THE NET", FG_COLOR, Vector::new(500., 500.))?;
+            if self.gd.timer.tick() && title_pos < 300. {
+                title_pos += 3.;
+            }            
 
             match self.gfx.present(&self.window) {
                 Ok(_) => {}
