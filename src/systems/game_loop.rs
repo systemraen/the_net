@@ -58,7 +58,7 @@ impl GameLoop {
             self.gfx.clear(Color::BLACK);
 
             self.scene_manager
-                .draw_scene(&self.gd, &mut self.gfx, &self.window);
+                .draw_scene(&mut self.gd, &mut self.gfx, &self.window);
 
             if self.gd.timer.tick() && title_pos < 300. {
                 title_pos += 3.;

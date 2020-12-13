@@ -1,23 +1,25 @@
 use {
 	crate::{
 		scenes::prelude::{Scene, SceneData},
-		structs::{game_data::TITLE_FONT, GameData},
+		structs::{game_data::{TITLE_FONT, FG_COLOR}, GameData},
 	},
 	log::error,
 	net_ui::{structs::WidgetData, widgets::Button, Context, Layer},
-	quicksilver::{graphics::FontRenderer, Graphics},
+	quicksilver::{geom::Vector, Graphics},
 };
 
 pub struct IntroScene {
-	data: SceneData
+	data: SceneData,
+	title_pos: f32,
 }
 
 impl IntroScene {
 	pub fn new() -> Self {
 		IntroScene {
 			data: SceneData {
-				context: Context::new()
+				context: Context::new(),
 			},
+			title_pos: -500.,
 		}
 	}
 }
@@ -39,12 +41,15 @@ impl Scene for IntroScene {
 		gd.asset_mgr.add_font(TITLE_FONT, gfx);
 	}
 
-	fn handle_data(&mut self, _gd: &GameData) {
+	fn handle_data(&mut self, _gd: &mut GameData) {
 		// intro gd handling
 		// eastern eggs and stuff
+		if _gd.timer.tick() {
+			self.title_pos += 5.;
+		}
 	}
 
-	fn draw_scene(&self, gd: &GameData, gfx: &mut Graphics) {
+	fn draw_scene(&self, gd: &mut GameData, gfx: &mut Graphics) {
 		//let context handle drawing
 		self.data
 			.context
@@ -56,7 +61,12 @@ impl Scene for IntroScene {
 				error!("Hey I'm trying to get font {} and cant T_T", TITLE_FONT);
 				return;
 			}
-		};		
+		};
+
+		match font.draw(gfx, "THE NET", FG_COLOR, Vector::new(500., self.title_pos)) {
+			Ok(_) => {},
+			Err(_) => {}
+		};
 	}
 
 	fn trans_from(&mut self) {

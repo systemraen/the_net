@@ -56,7 +56,7 @@ impl SceneManager {
 		scene.init(gd, gfx);
 	}
 
-	pub fn draw_scene(&mut self, gd: &GameData, gfx: &mut Graphics, window: &Window) {
+	pub fn draw_scene(&mut self, gd: &mut GameData, gfx: &mut Graphics, window: &Window) {
 		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
 		scene.draw(gd, gfx);
 	}

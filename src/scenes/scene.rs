@@ -5,7 +5,7 @@ use quicksilver::{
 };
 
 pub trait Scene {
-	fn draw(&mut self, gd: &GameData, gfx: &mut Graphics) {
+	fn draw(&mut self, gd: &mut GameData, gfx: &mut Graphics) {
 		//maybe process gd here for the mouse stuff?
 		// why though?
 		self.handle_data(gd);
@@ -17,7 +17,7 @@ pub trait Scene {
 	//#todo: remove the default impls
 	fn init(&mut self, _gd: &mut GameData, gfx: &Graphics) {}
 	fn trans_from(&mut self) {}
-	fn handle_data(&mut self, _gd: &GameData) {}
+	fn handle_data(&mut self, _gd: &mut GameData) {}
 	fn draw_scene(&self, gd: &GameData, _gfx: &mut Graphics) {}
 	fn draw_mouse(&self, gd: &GameData, gfx: &mut Graphics) {
 		// ☐ add to settings
