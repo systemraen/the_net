@@ -6,7 +6,7 @@ use quicksilver::{
 };
 
 use crate::structs::game_data::{GameData, FG_COLOR};
-use crate::systems::scene_mgr::SceneManager;
+use crate::systems::{AssetMgr, SceneManager};
 
 pub struct GameLoop {
     running: bool,
@@ -28,12 +28,13 @@ impl GameLoop {
                 mouse_pos: Vector::new(0., 0.),
                 last_mouse_pos: Vector::new(0., 0.),
                 timer: Timer::time_per_second(60.),
+                asset_mgr: AssetMgr::new()
             },
             scene_manager: SceneManager::new(),
         }
     }
 
-    pub fn init(mut self) -> Self {
+    pub fn init(&mut self) {
         //*~*~*~todo*~*~*~*~*~*~*~*~*~
         // ☐ start network stuff
         // ☐ init asset cacher
@@ -41,13 +42,13 @@ impl GameLoop {
         // ☑ init scene manager
         // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-        self.scene_manager.init();
-
-        self
+        //self.scene_manager.init(&mut self.gd, &self.gfx);
+        //self.gd.init();
     }
 
-    pub async fn run(&mut self) -> Result<()> {
-        
+    pub async fn run(&mut self) -> Result<()> { 
+        self.init();
+
         let mut title_pos: f32 = -500.;
 
         //#todo: Open issue in quicksilver to provide width of font

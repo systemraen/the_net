@@ -25,6 +25,7 @@ fn main() {
 
 // the game loop
 async fn app(window: Window, gfx: Graphics, input: Input) -> Result<()> {
-    let game_loop = GameLoop::new(window, gfx, input);
-    game_loop.init().run().await
+    let mut game_loop = GameLoop::new(window, gfx, input);
+    
+    game_loop.run().await
 }

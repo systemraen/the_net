@@ -7,18 +7,18 @@ use quicksilver::{
 pub trait Scene {
 	fn draw(&mut self, gd: &GameData, gfx: &mut Graphics) {
 		//maybe process gd here for the mouse stuff?
-			// why though?
+		// why though?
 		self.handle_data(gd);
 		self.draw_border(gfx);
-		self.draw_scene(gfx);
-		self.draw_mouse(gd, gfx);		
+		self.draw_scene(gd, gfx);
+		self.draw_mouse(gd, gfx);
 	}
 
 	//#todo: remove the default impls
-	fn init(&mut self) {}
+	fn init(&mut self, _gd: &mut GameData, gfx: &Graphics) {}
 	fn trans_from(&mut self) {}
-	fn handle_data(&mut self, gd: &GameData) {}
-	fn draw_scene(&self, gfx: &mut Graphics) {}
+	fn handle_data(&mut self, _gd: &GameData) {}
+	fn draw_scene(&self, gd: &GameData, _gfx: &mut Graphics) {}
 	fn draw_mouse(&self, gd: &GameData, gfx: &mut Graphics) {
 		// ☐ add to settings
 		// draw pointer

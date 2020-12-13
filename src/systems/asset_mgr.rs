@@ -4,9 +4,10 @@ use {
 		graphics::{FontRenderer, VectorFont},
 		Graphics,
 	},
-	std::collections::HashMap,
+	std::{collections::HashMap, sync::Arc},
 };
 
+//#todo: Wrap assets in Arc's?
 pub struct AssetMgr {
 	fonts: HashMap<String, FontRenderer>,
 }
@@ -17,11 +18,10 @@ impl AssetMgr {
 		}
 	}
 
-	pub async fn add_font(&mut self, name: &str, gfx: &Graphics)  {
+	pub async fn add_font(&mut self, name: &str, gfx: &Graphics) {
 		if self.fonts.contains_key(name) {
 			warn!("Font {} already found in cache", name);
 		}
-		
 		let ttf = match VectorFont::load(name).await {
 			Ok(ttf) => ttf,
 			Err(err) => {
@@ -29,8 +29,8 @@ impl AssetMgr {
 				return;
 			}
 		};
-		
-		let mut font = match ttf.to_renderer(&gfx, 72.) {
+
+		let font = match ttf.to_renderer(&gfx, 72.) {
 			Ok(font) => font,
 			Err(err) => {
 				error!("Error rendering font {}: {}", name, err);
@@ -40,7 +40,7 @@ impl AssetMgr {
 
 		self.fonts.insert(name.to_string(), font);
 
-		//font.draw(&mut self.gfx, "THE NET", FG_COLOR, Vector::new(500., title_pos))?;		
+		//font.draw(&mut self.gfx, "THE NET", FG_COLOR, Vector::new(500., title_pos))?;
 	}
 
 	pub fn get_font(&self, name: &str) -> Result<&FontRenderer, ()> {
