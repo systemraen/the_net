@@ -1,6 +1,9 @@
 use {
 	log::{error, warn},
-	quicksilver::{graphics::FontRenderer, Graphics},
+	quicksilver::{
+		graphics::{FontRenderer, VectorFont},
+		Graphics,
+	},
 	std::collections::HashMap,
 };
 
@@ -14,12 +17,30 @@ impl AssetMgr {
 		}
 	}
 
-	pub fn add_font(&mut self, name: &str, gfx: &Graphics) {
+	pub async fn add_font(&mut self, name: &str, gfx: &Graphics)  {
 		if self.fonts.contains_key(name) {
 			warn!("Font {} already found in cache", name);
 		}
-
 		
+		let ttf = match VectorFont::load(name).await {
+			Ok(ttf) => ttf,
+			Err(err) => {
+				error!("Error while loading font {}: {}", name, err);
+				return;
+			}
+		};
+		
+		let mut font = match ttf.to_renderer(&gfx, 72.) {
+			Ok(font) => font,
+			Err(err) => {
+				error!("Error rendering font {}: {}", name, err);
+				return;
+			}
+		};
+
+		self.fonts.insert(name.to_string(), font);
+
+		//font.draw(&mut self.gfx, "THE NET", FG_COLOR, Vector::new(500., title_pos))?;		
 	}
 
 	pub fn get_font(&self, name: &str) -> Result<&FontRenderer, ()> {
