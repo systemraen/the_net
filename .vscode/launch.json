@@ -8,14 +8,20 @@
 			"name": "(Windows) Launch",
 			"type": "cppvsdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/../target/debug/the_net.exe",
+			"program": "${workspaceFolder}/target/debug/the_net.exe",
 			"preLaunchTask": "Rust: cargo build - the_net",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": true,
-			"internalConsoleOptions": "neverOpen"
+			"internalConsoleOptions": "neverOpen",			
+            "environment": [
+                {
+                    "name": "CARGO_MANIFEST_DIR",
+                    "value": "${workspaceFolder}"
+                }
+            ],
 		}
 	]
 }
