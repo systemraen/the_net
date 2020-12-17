@@ -1402,7 +1402,7 @@ dependencies = [
 name = "net_ui"
 version = "0.1.0"
 dependencies = [
- "quicksilver 0.4.0",
+ "quicksilver",
 ]
 
 [[package]]
@@ -1726,28 +1726,6 @@ dependencies = [
 [[package]]
 name = "quicksilver"
 version = "0.4.0"
-dependencies = [
- "blinds",
- "bytemuck",
- "elefont",
- "gestalt",
- "golem",
- "image",
- "instant",
- "log",
- "mint",
- "platter",
- "rusttype 0.8.3",
- "serde 1.0.117",
- "simple_logger",
- "web_logger",
-]
-
-[[package]]
-name = "quicksilver"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "21405380ee8ccb5f8805f50a6e244306c1574cae126e2831ecffc1df2003e5a4"
 dependencies = [
  "blinds",
  "bytemuck",
@@ -2368,16 +2346,7 @@ version = "0.1.0"
 dependencies = [
  "log",
  "net_ui",
- "quicksilver 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "thread_local"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d40c6d1b69745a6ec6fb1ca717914848da4b44ae29d9b3080cbee91d72a69b14"
-dependencies = [
- "lazy_static 1.4.0",
+ "quicksilver",
 ]
 
 [[package]]
