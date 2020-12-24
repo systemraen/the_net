@@ -5,18 +5,18 @@ use {
 	},
 	log::error,
 	net_ui::{structs::WidgetData, widgets::Button, Context, Layer},
-	quicksilver::{graphics::FontRenderer, Graphics},
+	quicksilver::Graphics,
 };
 
 pub struct IntroScene {
-	data: SceneData
+	data: SceneData,
 }
 
 impl IntroScene {
 	pub fn new() -> Self {
 		IntroScene {
 			data: SceneData {
-				context: Context::new()
+				context: Context::new(),
 			},
 		}
 	}
@@ -36,7 +36,7 @@ impl Scene for IntroScene {
 			})],
 		});
 
-		gd.asset_mgr.add_font(TITLE_FONT, gfx);
+		//gd.asset_mgr.add_font(TITLE_FONT, gfx).await;
 	}
 
 	fn handle_data(&mut self, _gd: &GameData) {
@@ -56,7 +56,7 @@ impl Scene for IntroScene {
 				error!("Hey I'm trying to get font {} and cant T_T", TITLE_FONT);
 				return;
 			}
-		};		
+		};
 	}
 
 	fn trans_from(&mut self) {

@@ -1,7 +1,9 @@
-use crate::structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR};
-use quicksilver::{
-	geom::{Rectangle, Vector},
-	graphics::Graphics,
+use {
+	crate::structs::game_data::{GameData, DEFAULT_HEIGHT, DEFAULT_WIDTH, FG_COLOR},
+	quicksilver::{
+		geom::{Rectangle, Vector},
+		graphics::Graphics,
+	},
 };
 
 pub trait Scene {
@@ -15,7 +17,7 @@ pub trait Scene {
 	}
 
 	//#todo: remove the default impls
-	fn init(&mut self, _gd: &mut GameData, gfx: &Graphics) {}
+	fn init(&mut self, _gd: &mut GameData, gfx: &Graphics);
 	fn trans_from(&mut self) {}
 	fn handle_data(&mut self, _gd: &GameData) {}
 	fn draw_scene(&self, gd: &GameData, _gfx: &mut Graphics) {}

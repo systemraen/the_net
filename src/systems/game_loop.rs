@@ -1,11 +1,11 @@
 use quicksilver::{
     geom::Vector,
-    graphics::{Color, VectorFont},
+    graphics::Color,
     input::{Event, Key},
     Graphics, Input, Result, Timer, Window,
 };
 
-use crate::structs::game_data::{GameData, FG_COLOR};
+use crate::structs::game_data::GameData;
 use crate::systems::{AssetMgr, SceneManager};
 
 pub struct GameLoop {
@@ -34,7 +34,7 @@ impl GameLoop {
         }
     }
 
-    pub fn init(&mut self) {
+    async fn init(&mut self) {
         //*~*~*~todo*~*~*~*~*~*~*~*~*~
         // ☐ start network stuff
         // ☐ init asset cacher
@@ -42,12 +42,11 @@ impl GameLoop {
         // ☑ init scene manager
         // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-        //self.scene_manager.init(&mut self.gd, &self.gfx);
-        //self.gd.init();
+        self.scene_manager.init(&mut self.gd, &self.gfx).await;
     }
 
     pub async fn run(&mut self) -> Result<()> { 
-        self.init();
+        self.init().await;
 
         let mut title_pos: f32 = -500.;
 

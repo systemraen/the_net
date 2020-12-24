@@ -1,7 +1,6 @@
 use std::collections::HashMap;
 use crate::structs::game_data::GameData;
 use quicksilver::{
-	graphics::{Color, VectorFont},
 	Graphics, Window,
 };
 
@@ -33,7 +32,7 @@ impl SceneManager {
 		}
 	}
 
-	pub fn init(&mut self, gd: &mut GameData, gfx: &Graphics) {		
+	pub async fn init(&mut self, gd: &mut GameData, gfx: &Graphics) {		
 
 		self.scenes.insert(SceneName::Intro, Box::new(IntroScene::new()));
 		// self.scenes.insert(SceneName::Loading, Box::new(LoadingScene::new()));
@@ -57,15 +56,13 @@ impl SceneManager {
 	}
 
 	pub fn draw_scene(&mut self, gd: &GameData, gfx: &mut Graphics, window: &Window) {
-		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
-		scene.draw(gd, gfx);
-	}
-
-	fn draw_ui(&self, gfx: &mut Graphics) {
-		
-	}
-
-	fn draw_mouse(&self, gd: &GameData, gfx: &mut Graphics) {
-		
+		match self.scenes.get_mut(&self.current_scene) {
+			Some(scene) => {
+				scene.draw(gd, gfx);
+			}
+			None => {
+				//#todo add error log
+			}
+		};	
 	}
 }

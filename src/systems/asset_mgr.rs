@@ -4,7 +4,7 @@ use {
 		graphics::{FontRenderer, VectorFont},
 		Graphics,
 	},
-	std::{collections::HashMap, sync::Arc},
+	std::collections::HashMap,
 };
 
 //#todo: Wrap assets in Arc's?

@@ -17,9 +17,7 @@ pub struct GameData {
 }
 
 impl GameData {
-    pub fn init(&mut self) {
-        //self.asset_mgr.init();
-    }
+    pub fn init(&mut self) {}
 
     //also records previous position
     pub fn set_mouse_pos(&mut self, pos: Vector) {
