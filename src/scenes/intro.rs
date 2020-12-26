@@ -27,7 +27,7 @@ impl IntroScene {
 //#endregion
 
 impl Scene for IntroScene {
-	fn init(&mut self, gd: &mut GameData, gfx: &Graphics) {
+	fn init(&mut self, gd: &mut GameData) {
 		//init data
 		//self.context
 		self.data.context.add_layer(Layer {
@@ -36,7 +36,7 @@ impl Scene for IntroScene {
 			})],
 		});
 
-		//gd.asset_mgr.add_font(TITLE_FONT, gfx).await;
+		gd.asset_mgr.add_font(TITLE_FONT);
 	}
 
 	fn handle_data(&mut self, _gd: &GameData) {

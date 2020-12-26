@@ -17,7 +17,7 @@ pub trait Scene {
 	}
 
 	//#todo: remove the default impls
-	fn init(&mut self, _gd: &mut GameData, gfx: &Graphics);
+	fn init(&mut self, _gd: &mut GameData);
 	fn trans_from(&mut self) {}
 	fn handle_data(&mut self, _gd: &GameData) {}
 	fn draw_scene(&self, gd: &GameData, _gfx: &mut Graphics) {}

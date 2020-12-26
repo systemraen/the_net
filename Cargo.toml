@@ -14,4 +14,5 @@ members = [
 quicksilver = { path = "quicksilver" } 
 net_ui = { path = "net_ui" }
 log = "0.4.11"
-async-trait = "0.1.42"
+#async-trait = "0.1.42" #todo: figure out how to use async-trait
+futures = "0.3.0"

@@ -1,5 +1,5 @@
 use {
-	log::{error, warn},
+	log::{error, info, warn},
 	quicksilver::{
 		graphics::{FontRenderer, VectorFont},
 		Graphics,
@@ -7,10 +7,26 @@ use {
 	std::collections::HashMap,
 };
 
-//#todo: Wrap assets in Arc's?
-pub struct AssetMgr {
-	fonts: HashMap<String, FontRenderer>,
+struct FontData {
+	pub font: Option<FontRenderer>,
+	pub loaded: bool
 }
+
+impl FontData {
+	pub fn new() -> Self {
+		FontData {
+			font: None, 
+			loaded: false
+		}
+	}
+}
+
+//#todo: Wrap assets in Arc's?
+pub struct AssetMgr<T> where T: Fn() {
+	fonts: HashMap<String, FontRenderer>,
+	to_load: Vec<T>
+}
+
 impl AssetMgr {
 	pub fn new() -> Self {
 		Self {
@@ -18,27 +34,43 @@ impl AssetMgr {
 		}
 	}
 
-	pub async fn add_font(&mut self, name: &str, gfx: &Graphics) {
-		if self.fonts.contains_key(name) {
-			warn!("Font {} already found in cache", name);
+	pub async fn finish_load(&mut self, gfx: &Graphics) {
+		for (name, font_data) in &self.fonts {
+			match self.load_font(&name, &gfx).await {
+				Ok(font) => { font_data.font = Some(font); }
+				_ => {}
+			}
 		}
+	}
+
+	pub async fn load_font(&self, name: &String, gfx: &Graphics) -> Result<FontRenderer, ()> {
 		let ttf = match VectorFont::load(name).await {
-			Ok(ttf) => ttf,
+			Ok(ttf) => {
+				info!("Loaded {}", name);
+				ttf
+			}
 			Err(err) => {
 				error!("Error while loading font {}: {}", name, err);
-				return;
+				return Err(());
 			}
 		};
 
 		let font = match ttf.to_renderer(&gfx, 72.) {
-			Ok(font) => font,
+			Ok(font) => return Ok(font),
 			Err(err) => {
 				error!("Error rendering font {}: {}", name, err);
-				return;
+				return Err(());
 			}
 		};
+	}
 
-		self.fonts.insert(name.to_string(), font);
+	pub fn add_font(&mut self, name: &str) {
+		if self.fonts.contains_key(name) {
+			warn!("Font {} already found in cache", name);
+		}
+
+		self.fonts.insert(name.to_string(), FontData::new());
+		
 
 		//font.draw(&mut self.gfx, "THE NET", FG_COLOR, Vector::new(500., title_pos))?;
 	}
@@ -50,7 +82,13 @@ impl AssetMgr {
 			return Err(());
 		}
 
-		Ok(&self.fonts[name])
+		match &self.fonts[name] {
+			Some(font) => Ok(font.font),
+			None => {
+				error!("Font {} not loaded", name);
+				Err(())
+			}
+		}
 	}
 
 	pub fn clear_font(&mut self, name: &str) -> Result<(), ()> {

@@ -34,7 +34,7 @@ impl GameLoop {
         }
     }
 
-    async fn init(&mut self) {
+    fn init(&mut self) {
         //*~*~*~todo*~*~*~*~*~*~*~*~*~
         // ☐ start network stuff
         // ☐ init asset cacher
@@ -42,17 +42,17 @@ impl GameLoop {
         // ☑ init scene manager
         // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
-        self.scene_manager.init(&mut self.gd, &self.gfx).await;
+        self.scene_manager.init(&mut self.gd, &self.gfx);
     }
 
     pub async fn run(&mut self) -> Result<()> { 
-        self.init().await;
-
         let mut title_pos: f32 = -500.;
 
         //#todo: Open issue in quicksilver to provide width of font
 
         while self.running {
+            self.gd.asset_mgr.finish_load(&self.gfx).await;
+
             self.handle_input().await;
             self.gfx.clear(Color::BLACK);
 

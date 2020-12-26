@@ -14,8 +14,8 @@
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
-			"externalConsole": true,
-			"internalConsoleOptions": "neverOpen",			
+			"externalConsole": false,
+			"internalConsoleOptions": "openOnSessionStart",			
             "environment": [
                 {
                     "name": "CARGO_MANIFEST_DIR",

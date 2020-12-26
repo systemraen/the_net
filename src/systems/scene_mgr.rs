@@ -32,7 +32,7 @@ impl SceneManager {
 		}
 	}
 
-	pub async fn init(&mut self, gd: &mut GameData, gfx: &Graphics) {		
+	pub fn init(&mut self, gd: &mut GameData, gfx: &Graphics) {		
 
 		self.scenes.insert(SceneName::Intro, Box::new(IntroScene::new()));
 		// self.scenes.insert(SceneName::Loading, Box::new(LoadingScene::new()));
@@ -43,7 +43,7 @@ impl SceneManager {
 		// self.scenes.insert(SceneName::DevConsole, Box::new(DevConScene::new()));
 	
 		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
-		scene.init(gd, gfx);
+		scene.init(gd);
 	}
 
 	pub fn trans_to(&mut self, next_scene: SceneName, gd: &mut GameData, gfx: &Graphics) {
@@ -52,7 +52,7 @@ impl SceneManager {
 		self.current_scene = next_scene;
 
 		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
-		scene.init(gd, gfx);
+		scene.init(gd);
 	}
 
 	pub fn draw_scene(&mut self, gd: &GameData, gfx: &mut Graphics, window: &Window) {
