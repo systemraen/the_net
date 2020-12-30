@@ -7,24 +7,9 @@ use {
 	std::collections::HashMap,
 };
 
-struct FontData {
-	pub font: Option<FontRenderer>,
-	pub loaded: bool
-}
-
-impl FontData {
-	pub fn new() -> Self {
-		FontData {
-			font: None, 
-			loaded: false
-		}
-	}
-}
-
 //#todo: Wrap assets in Arc's?
-pub struct AssetMgr<T> where T: Fn() {
-	fonts: HashMap<String, FontRenderer>,
-	to_load: Vec<T>
+pub struct AssetMgr {
+	fonts: HashMap<String, Option<FontRenderer>>,
 }
 
 impl AssetMgr {
@@ -35,10 +20,20 @@ impl AssetMgr {
 	}
 
 	pub async fn finish_load(&mut self, gfx: &Graphics) {
-		for (name, font_data) in &self.fonts {
-			match self.load_font(&name, &gfx).await {
-				Ok(font) => { font_data.font = Some(font); }
-				_ => {}
+		// get fonts where None -> can just use the keys
+		let to_load_fonts: Vec<String> = self
+			.fonts
+			.iter()
+			.filter(|x| x.1.is_none())
+			.map(|x| x.0.clone())
+			.collect();
+			
+		for font_name in to_load_fonts {
+			match self.load_font(&font_name, &gfx).await {
+				Ok(font) => {
+					self.fonts.insert(font_name.clone(), Some(font));
+				}
+				Err(_) => {}
 			}
 		}
 	}
@@ -69,8 +64,7 @@ impl AssetMgr {
 			warn!("Font {} already found in cache", name);
 		}
 
-		self.fonts.insert(name.to_string(), FontData::new());
-		
+		self.fonts.insert(name.to_string(), None);
 
 		//font.draw(&mut self.gfx, "THE NET", FG_COLOR, Vector::new(500., title_pos))?;
 	}
@@ -83,7 +77,7 @@ impl AssetMgr {
 		}
 
 		match &self.fonts[name] {
-			Some(font) => Ok(font.font),
+			Some(font) => Ok(font),
 			None => {
 				error!("Font {} not loaded", name);
 				Err(())

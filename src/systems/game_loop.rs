@@ -50,6 +50,8 @@ impl GameLoop {
 
         //#todo: Open issue in quicksilver to provide width of font
 
+        self.init();
+
         while self.running {
             self.gd.asset_mgr.finish_load(&self.gfx).await;
 

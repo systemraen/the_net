@@ -1,8 +1,6 @@
-use std::collections::HashMap;
 use crate::structs::game_data::GameData;
-use quicksilver::{
-	Graphics, Window,
-};
+use quicksilver::{Graphics, Window};
+use std::collections::HashMap;
 
 use crate::scenes::prelude::*;
 
@@ -16,7 +14,7 @@ pub enum SceneName {
 	Game,
 	Pause,
 	Menu,
-	DevConsole
+	DevConsole,
 }
 
 pub struct SceneManager {
@@ -32,16 +30,15 @@ impl SceneManager {
 		}
 	}
 
-	pub fn init(&mut self, gd: &mut GameData, gfx: &Graphics) {		
-
-		self.scenes.insert(SceneName::Intro, Box::new(IntroScene::new()));
+	pub fn init(&mut self, gd: &mut GameData, gfx: &Graphics) {
+		self.scenes
+			.insert(SceneName::Intro, Box::new(IntroScene::new()));
 		// self.scenes.insert(SceneName::Loading, Box::new(LoadingScene::new()));
 		// self.scenes.insert(SceneName::Title, Box::new(TitleScene::new()));
 		// self.scenes.insert(SceneName::Game, Box::new(GameScene::new()));
 		// self.scenes.insert(SceneName::Pause, Box::new(PauseScene::new()));
 		// self.scenes.insert(SceneName::Menu, Box::new(MenuScene::new()));
 		// self.scenes.insert(SceneName::DevConsole, Box::new(DevConScene::new()));
-	
 		let scene = self.scenes.get_mut(&self.current_scene).unwrap();
 		scene.init(gd);
 	}
@@ -63,6 +60,6 @@ impl SceneManager {
 			None => {
 				//#todo add error log
 			}
-		};	
+		};
 	}
 }
