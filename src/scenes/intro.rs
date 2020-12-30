@@ -1,6 +1,6 @@
 use {
 	crate::{
-		scenes::prelude::{Scene, SceneData},
+		scenes::prelude::{Scene, SceneData, SceneName},
 		structs::{
 			game_data::{FG_COLOR, TITLE_FONT},
 			GameData,
@@ -44,13 +44,15 @@ impl Scene for IntroScene {
 		gd.asset_mgr.add_font(TITLE_FONT);
 	}
 
-	fn handle_data(&mut self, gd: &mut GameData) {
+	fn handle_data(&mut self, gd: &mut GameData) -> Option<SceneName> {
 		// intro gd handling
 		// eastern eggs and stuff
 
 		if gd.timer.tick() && self.title_pos < 300. {
 			self.title_pos += 3.;
 		}
+
+		None
 	}
 
 	fn draw_scene(&self, gd: &mut GameData, gfx: &mut Graphics) {
@@ -67,6 +69,7 @@ impl Scene for IntroScene {
 			}
 		};
 
+		//#todo center title
 		font.draw(gfx, "THE NET", FG_COLOR, Vector::new(500., self.title_pos))
 			.unwrap();
 	}
@@ -76,8 +79,3 @@ impl Scene for IntroScene {
 		self.data.context.clear_layers();
 	}
 }
-
-/*
-There's a few ways I could try to implement this
-	> store data
-*/

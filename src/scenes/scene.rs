@@ -6,6 +6,17 @@ use {
 	},
 };
 
+#[derive(Hash, Eq, PartialEq)]
+pub enum SceneName {
+	Intro,
+	Loading,
+	Title,
+	Game,
+	Pause,
+	Menu,
+	DevConsole,
+}
+
 pub trait Scene {
 	fn draw(&mut self, gd: &mut GameData, gfx: &mut Graphics) {
 		//maybe process gd here for the mouse stuff?
@@ -19,7 +30,7 @@ pub trait Scene {
 	//#todo: remove the default impls
 	fn init(&mut self, _gd: &mut GameData);
 	fn trans_from(&mut self) {}
-	fn handle_data(&mut self, _gd: &mut GameData) {}
+	fn handle_data(&mut self, _gd: &mut GameData) -> Option<SceneName> { None }
 	fn draw_scene(&self, gd: &mut GameData, _gfx: &mut Graphics) {}
 	fn draw_mouse(&self, gd: &GameData, gfx: &mut Graphics) {
 		// ☐ add to settings

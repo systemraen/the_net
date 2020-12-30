@@ -1,4 +1,4 @@
-use quicksilver::{geom::Vector, graphics::Color, Timer};
+use quicksilver::{geom::Vector, graphics::Color, Timer, input::Event};
 use crate::systems::asset_mgr::AssetMgr;
 
 //https://en.wikipedia.org/wiki/16:9_aspect_ratio#Common_resolutions
@@ -13,7 +13,8 @@ pub struct GameData {
     pub mouse_pos: Vector,
     pub last_mouse_pos: Vector,
     pub timer: Timer,
-    pub asset_mgr: AssetMgr
+    pub asset_mgr: AssetMgr,
+    pub event: Option<Event>
 }
 
 impl GameData {
@@ -30,5 +31,9 @@ impl GameData {
         if self.last_mouse_pos != self.mouse_pos {
             //println!("m: {} | lm: {}", self.mouse_pos, self.last_mouse_pos);
         }
+    }
+
+    pub fn handle_input(&mut self, event: Event) {
+       self.event = Some(event);
     }
 }

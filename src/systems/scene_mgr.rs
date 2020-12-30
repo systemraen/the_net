@@ -6,17 +6,6 @@ use crate::scenes::prelude::*;
 
 type SceneStore = HashMap<SceneName, Box<dyn Scene>>;
 
-#[derive(Hash, Eq, PartialEq)]
-pub enum SceneName {
-	Intro,
-	Loading,
-	Title,
-	Game,
-	Pause,
-	Menu,
-	DevConsole,
-}
-
 pub struct SceneManager {
 	scenes: SceneStore,
 	current_scene: SceneName,

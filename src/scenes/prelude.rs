@@ -6,4 +6,4 @@ pub use crate::intro::IntroScene;
 // pub use crate::pause::PauseScene;
 // pub use crate::title::TitleScene;
 pub use crate::scene_data::SceneData;
-pub use crate::scene::Scene;
+pub use crate::scene::{Scene, SceneName};

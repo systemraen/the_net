@@ -28,7 +28,8 @@ impl GameLoop {
                 mouse_pos: Vector::new(0., 0.),
                 last_mouse_pos: Vector::new(0., 0.),
                 timer: Timer::time_per_second(60.),
-                asset_mgr: AssetMgr::new()
+                asset_mgr: AssetMgr::new(),
+                event: None
             },
             scene_manager: SceneManager::new(),
         }
@@ -74,6 +75,8 @@ impl GameLoop {
 
     async fn handle_input(&mut self) {
         while let Some(event) = self.input.next_event().await {
+            self.gd.handle_input(event.clone());
+
             match event {
                 Event::KeyboardInput(k) if k.is_down() => {
                     if k.key() == Key::Escape {
@@ -81,7 +84,7 @@ impl GameLoop {
                     }
                     #[cfg(debug_assertions)]
                     println!("{:?}", k.key());
-
+    
                     //#todo: pull in config for key mappings
                     // for c in config
                     // if e.key is c.Key
@@ -91,7 +94,9 @@ impl GameLoop {
                 _ => {}
             }
         }
+
         self.gd.set_mouse_pos(self.input.mouse().location());
+        
         #[cfg(debug_assertions)]
         self.gd.print();
     }
