@@ -27,7 +27,7 @@ impl AssetMgr {
 			.filter(|x| x.1.is_none())
 			.map(|x| x.0.clone())
 			.collect();
-			
+
 		for font_name in to_load_fonts {
 			match self.load_font(&font_name, &gfx).await {
 				Ok(font) => {
@@ -65,19 +65,25 @@ impl AssetMgr {
 		}
 
 		self.fonts.insert(name.to_string(), None);
-
-		//font.draw(&mut self.gfx, "THE NET", FG_COLOR, Vector::new(500., title_pos))?;
 	}
 
-	pub fn get_font(&self, name: &str) -> Result<&FontRenderer, ()> {
+	pub fn get_font(&mut self, name: &str) -> Result<&mut FontRenderer, ()> {
 		if !self.fonts.contains_key(name) {
 			//#todo Add if dbg
 			error!("No font {} found!", name);
 			return Err(());
 		}
 
-		match &self.fonts[name] {
-			Some(font) => Ok(font),
+		match self.fonts.get_mut(name) {
+			Some(font) => {
+				match font {
+					Some(font) => Ok(font),
+					None => {
+						error!("Font {} not initialized before draw", name);
+						Err(())
+					}
+				}
+			}
 			None => {
 				error!("Font {} not loaded", name);
 				Err(())
