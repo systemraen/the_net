@@ -22,7 +22,7 @@ impl IntroScene {
 			data: SceneData {
 				context: Context::new(),
 			},
-			title_pos: -500.,
+			title_pos: -200.,
 		}
 	}
 }
@@ -35,11 +35,11 @@ impl Scene for IntroScene {
 	fn init(&mut self, gd: &mut GameData) {
 		//init data
 		//self.context
-		self.data.context.add_layer(Layer {
-			widgets: vec![Box::new(Button {
-				data: WidgetData::new(0., 0., 100., 100., true, true),
-			})],
-		});
+		// self.data.context.add_layer(Layer {
+		// 	widgets: vec![Box::new(Button {
+		// 		data: WidgetData::new(0., 0., 100., 100., true, true),
+		// 	})],
+		// });
 
 		gd.asset_mgr.add_font(TITLE_FONT);
 	}
