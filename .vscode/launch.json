@@ -13,7 +13,6 @@
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
-			"environment": [],
 			"externalConsole": false,
 			"internalConsoleOptions": "openOnSessionStart",			
             "environment": [
