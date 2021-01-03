@@ -8,11 +8,11 @@ use {
 };
 
 //#todo: Wrap assets in Arc's?
-pub struct AssetMgr {
+pub struct AssetManager {
 	fonts: HashMap<String, Option<FontRenderer>>,
 }
 
-impl AssetMgr {
+impl AssetManager {
 	pub fn new() -> Self {
 		Self {
 			fonts: HashMap::new(),

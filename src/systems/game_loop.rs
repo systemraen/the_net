@@ -6,7 +6,7 @@ use quicksilver::{
 };
 
 use crate::structs::game_data::GameData;
-use crate::systems::{AssetMgr, SceneManager};
+use crate::systems::{AssetManager, EventManager, SceneManager};
 
 pub struct GameLoop {
     running: bool,
@@ -14,7 +14,8 @@ pub struct GameLoop {
     gfx: Graphics,
     input: Input,
     gd: GameData,
-    scene_manager: SceneManager,
+    scene_mgr: SceneManager,
+    event_mgr: EventManager
 }
 
 impl GameLoop {
@@ -28,10 +29,10 @@ impl GameLoop {
                 mouse_pos: Vector::new(0., 0.),
                 last_mouse_pos: Vector::new(0., 0.),
                 timer: Timer::time_per_second(60.),
-                asset_mgr: AssetMgr::new(),
-                event: None
+                asset_mgr: AssetManager::new(),
             },
-            scene_manager: SceneManager::new(),
+            scene_mgr: SceneManager::new(),
+            event_mgr: EventManager::new(),
         }
     }
 
@@ -41,25 +42,22 @@ impl GameLoop {
         // ☐ init asset cacher
         // ☐ load initial assets
         // ☑ init scene manager
-        // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+        // *~scene_mgr~*~*~*~*~*~*~*~*~*~*~
 
-        self.scene_manager.init(&mut self.gd, &self.gfx);
+        self.scene_mgr.init(&mut self.gd, &self.gfx);
     }
 
-    pub async fn run(&mut self) -> Result<()> { 
-        let mut title_pos: f32 = -500.;
-
-        //#todo: Open issue in quicksilver to provide width of font
-
+    pub async fn run(&mut self) -> Result<()> {
         self.init();
 
         while self.running {
             self.gd.asset_mgr.finish_load(&self.gfx).await;
+            //self.event_mgr.handle_input(&mut self.input);
 
             self.handle_input().await;
             self.gfx.clear(Color::BLACK);
 
-            self.scene_manager
+            self.scene_mgr
                 .draw_scene(&mut self.gd, &mut self.gfx, &self.window);
 
             match self.gfx.present(&self.window) {
@@ -75,20 +73,11 @@ impl GameLoop {
 
     async fn handle_input(&mut self) {
         while let Some(event) = self.input.next_event().await {
-            self.gd.handle_input(event.clone());
-
             match event {
                 Event::KeyboardInput(k) if k.is_down() => {
                     if k.key() == Key::Escape {
                         self.running = false;
                     }
-                    #[cfg(debug_assertions)]
-                    println!("{:?}", k.key());
-    
-                    //#todo: pull in config for key mappings
-                    // for c in config
-                    // if e.key is c.Key
-                    // c.action(e, &mut self.gd)
                 }
                 Event::ReceivedCharacter(_c) => {}
                 _ => {}
@@ -96,7 +85,6 @@ impl GameLoop {
         }
 
         self.gd.set_mouse_pos(self.input.mouse().location());
-        
         #[cfg(debug_assertions)]
         self.gd.print();
     }

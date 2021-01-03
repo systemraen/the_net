@@ -8,7 +8,7 @@ use {
 	},
 	log::error,
 	net_ui::{structs::WidgetData, widgets::Button, Context, Layer},
-	quicksilver::{geom::Vector, Graphics},
+	quicksilver::{geom::Vector, Graphics, input::{Event, Key}},
 };
 
 pub struct IntroScene {
@@ -46,7 +46,7 @@ impl Scene for IntroScene {
 
 	fn handle_data(&mut self, gd: &mut GameData) -> Option<SceneName> {
 		// intro gd handling
-		// eastern eggs and stuff
+		// eastern eggs and stuff		
 
 		if gd.timer.tick() && self.title_pos < 300. {
 			self.title_pos += 3.;
@@ -70,6 +70,7 @@ impl Scene for IntroScene {
 		};
 
 		//#todo center title
+        //#todo: Open issue in quicksilver to provide width of font
 		font.draw(gfx, "THE NET", FG_COLOR, Vector::new(500., self.title_pos))
 			.unwrap();
 	}

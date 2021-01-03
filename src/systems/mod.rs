@@ -4,7 +4,7 @@ pub mod game_loop;
 pub mod scene_mgr;
 pub mod settings_mgr;
 
-pub use asset_mgr::AssetMgr;
+pub use asset_mgr::AssetManager;
 pub use event_mgr::EventManager;
 pub use game_loop::GameLoop;
 pub use scene_mgr::SceneManager;
